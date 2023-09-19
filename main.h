@@ -4,4 +4,4 @@
 int _printf(const char *format, ...);
 int _put(char c, int l);
 
-#endif // MAIN.H
+#endif
