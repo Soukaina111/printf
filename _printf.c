@@ -10,7 +10,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int cont = 0, len;
+	int cont = 0, len, var1, var2;
 	char c;
 	char *str;
 	va_list arg;
@@ -50,6 +50,23 @@ int _printf(const char *format, ...)
 				_put(*format, 1);
 				cont++;
 			}
+			else if (*format == 'd' )
+			{
+			
+				var1 = va_arg(arg, int);
+                                _put(var1, 1);
+				cont++;
+			
+			}
+
+			 else if (*format == 'i' )
+                        {
+
+                                var2 = va_arg(arg, int);
+                                _put(var2, 1);
+                                cont++;
+
+                        }
 		}
 		format++;
 	}
