@@ -1,6 +1,19 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include "main.h"
+#include <unistd.h>
+
+/**
+ * _put - writes the character c to stdout
+ * @c: The character to print
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _put(char c, int l)
+{
+	return (write(1, &c, l));
+}
+
 /**
  * _printf - Start of function that produces output according to a format.
  * @format: Pointer
@@ -8,52 +21,49 @@
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int i = 0;
+	int cont = 0, len;
 	char c;
-	const char *s;
+	char *str;
+	va_list arg;
 
-	va_start(args, format);
+	if (format == NULL)
+		return (-1);
+	va_start(arg, format);
 	while (*format != '\0')
 	{
-		if (*format == '%')
+		if (*format != '%')
 		{
-			format+;
-			if (*format == 'c')
-			{
-				c = va_arg(args, int);
-				putchar(c);
-				i++;
-			}
-			if (*format == 's')
-			{
-				s = va_arg(args, const char *);
-				while (*s != '\0')
-				{
-					putchar(*s);
-					s++;
-					i++;
-				}
-			}
-			if (*format == '%')
-			{
-				putchar('%');
-				i++;
-			}
-			else
-			{
-				putchar('%');
-				putchar(*format);
-				i += 2;
-			}
+			_put(format, 1);
+			cont++;
 		}
 		else
 		{
-		putchar(*format);
-		i++;
+			format++;
+			if (*format == '\0')
+				break;
+			if (*format == 'c')
+			{
+				c = va_arg(arg, int);
+				_put(c, 1);
+				cont++;
+			}
+			else if (*format == 's')
+			{
+				str = va_arg(arg, char*);
+				len = 0;
+				while (str[len] = '\0')
+					len++;
+				_put(str, len);
+				cont = cont + len;
+			}
+			else if (*format == '%')
+			{
+				_put(format, 1);
+				cont++;
+			}
 		}
 		format++;
 	}
-	va_end(args);
-	return (i);
+	va_end(arg);
+	return (cont);
 }
