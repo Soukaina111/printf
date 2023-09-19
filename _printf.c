@@ -4,17 +4,6 @@
 #include <unistd.h>
 
 /**
- * _put - writes the character c to stdout
- * @c: The character to print
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _put(char c, int l)
-{
-	return (write(1, &c, l));
-}
-
-/**
  * _printf - Start of function that produces output according to a format.
  * @format: Pointer
  * Return: the number of characters printed
