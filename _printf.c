@@ -53,7 +53,7 @@ int _printf(const char *format, ...)
 			else if (*format == 'd' )
 			{
 			
-				var1 = va_arg(arg, int);
+				var1 = (int)va_arg(arg, int);
                                 _put(var1, 1);
 				cont++;
 			
@@ -62,7 +62,7 @@ int _printf(const char *format, ...)
 			 else if (*format == 'i' )
                         {
 
-                                var2 = va_arg(arg, int);
+                                var2 = (int)va_arg(arg, int);
                                 _put(var2, 1);
                                 cont++;
 
