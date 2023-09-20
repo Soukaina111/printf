@@ -42,7 +42,7 @@ int _printf(const char *format, ...)
 				len = 0;
 				while (str[len] != '\0')
 					len++;
-				_put(str[len], 1);
+				_put(*str, len);
 				cont = cont + len;
 			}
 			else if (*format == '%')
